@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "ipv6-admin",
+  "account_id": "111111111111",
+  "source": "synthetic",
+  "regions": [
+    "us-east-1"
+  ],
+  "controls_complete": true,
+  "roles": {},
+  "buckets": {},
+  "security_groups": {
+    "admin-sg": {
+      "arn": "arn:aws:ec2:us-east-1:111111111111:security-group/sg-synthetic",
+      "ingress": [
+        {
+          "protocol": "-1",
+          "cidrs": [
+            "::/0"
+          ]
+        }
+      ]
+    }
+  },
+  "collection_errors": []
+}

@@ -1,0 +1,33 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "scoped-wildcard",
+  "account_id": "111111111111",
+  "source": "synthetic",
+  "regions": [
+    "us-east-1"
+  ],
+  "controls_complete": true,
+  "roles": {
+    "scoped": {
+      "arn": "arn:aws:iam::111111111111:role/scoped",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "arn:aws:s3:::one-bucket/*"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Statement": []
+      }
+    }
+  },
+  "buckets": {},
+  "security_groups": {},
+  "collection_errors": []
+}

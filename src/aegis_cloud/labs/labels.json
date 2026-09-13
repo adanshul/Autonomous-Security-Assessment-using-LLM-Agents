@@ -1,0 +1,79 @@
+{
+  "schema_version": 1,
+  "name": "aegis-synthetic-v1",
+  "dataset_kind": "synthetic",
+  "cases": {
+    "exposed": {
+      "snapshot_file": "exposed.json",
+      "expected_keys": [
+        "IAM_ADMIN:admin",
+        "IAM_PUBLIC_TRUST:public-role",
+        "IAM_ASSUME_ADMIN_PATH:ci->admin",
+        "IAM_ASSUME_ADMIN_PATH:broker->admin",
+        "S3_PUBLIC_POLICY:research-data",
+        "EC2_OPEN_ADMIN:admin-sg"
+      ]
+    },
+    "hardened": {
+      "snapshot_file": "hardened.json",
+      "expected_keys": []
+    },
+    "explicit-deny": {
+      "snapshot_file": "explicit-deny.json",
+      "expected_keys": [
+        "IAM_ADMIN:admin",
+        "IAM_ASSUME_ADMIN_PATH:broker->admin"
+      ]
+    },
+    "boundary": {
+      "snapshot_file": "boundary.json",
+      "expected_keys": [
+        "IAM_ADMIN:admin",
+        "IAM_ASSUME_ADMIN_PATH:broker->admin"
+      ]
+    },
+    "conditional-trust": {
+      "snapshot_file": "conditional-trust.json",
+      "expected_keys": [
+        "IAM_ADMIN:admin",
+        "IAM_ASSUME_ADMIN_PATH:broker->admin"
+      ]
+    },
+    "cycle": {
+      "snapshot_file": "cycle.json",
+      "expected_keys": [
+        "IAM_ADMIN:admin",
+        "IAM_ASSUME_ADMIN_PATH:ci->admin",
+        "IAM_ASSUME_ADMIN_PATH:broker->admin"
+      ]
+    },
+    "blocked-public-policy": {
+      "snapshot_file": "blocked-public-policy.json",
+      "expected_keys": []
+    },
+    "unknown-public-block": {
+      "snapshot_file": "unknown-public-block.json",
+      "expected_keys": [
+        "S3_PUBLIC_POLICY:research-data"
+      ]
+    },
+    "service-trust": {
+      "snapshot_file": "service-trust.json",
+      "expected_keys": []
+    },
+    "ipv6-admin": {
+      "snapshot_file": "ipv6-admin.json",
+      "expected_keys": [
+        "EC2_OPEN_ADMIN:admin-sg"
+      ]
+    },
+    "denied-trust": {
+      "snapshot_file": "denied-trust.json",
+      "expected_keys": []
+    },
+    "scoped-wildcard": {
+      "snapshot_file": "scoped-wildcard.json",
+      "expected_keys": []
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "service-trust",
+  "account_id": "111111111111",
+  "source": "synthetic",
+  "regions": [
+    "us-east-1"
+  ],
+  "controls_complete": true,
+  "roles": {
+    "service": {
+      "arn": "arn:aws:iam::111111111111:role/service",
+      "policies": [],
+      "trust": {
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "Service": "ec2.amazonaws.com"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "buckets": {},
+  "security_groups": {},
+  "collection_errors": []
+}
