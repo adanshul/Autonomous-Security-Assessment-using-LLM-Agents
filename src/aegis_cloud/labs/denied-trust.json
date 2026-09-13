@@ -1,0 +1,36 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "denied-trust",
+  "account_id": "111111111111",
+  "source": "synthetic",
+  "regions": [
+    "us-east-1"
+  ],
+  "controls_complete": true,
+  "roles": {
+    "locked": {
+      "arn": "arn:aws:iam::111111111111:role/locked",
+      "policies": [],
+      "trust": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "AWS": "*"
+            }
+          },
+          {
+            "Effect": "Deny",
+            "Action": "sts:AssumeRole",
+            "Principal": "*"
+          }
+        ]
+      }
+    }
+  },
+  "buckets": {},
+  "security_groups": {},
+  "collection_errors": []
+}

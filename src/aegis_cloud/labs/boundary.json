@@ -1,0 +1,99 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "boundary",
+  "account_id": "111111111111",
+  "source": "synthetic",
+  "regions": [
+    "us-east-1"
+  ],
+  "controls_complete": true,
+  "roles": {
+    "ci": {
+      "arn": "arn:aws:iam::111111111111:role/ci",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Resource": "arn:aws:iam::111111111111:role/broker"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Statement": []
+      },
+      "boundary": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "s3:GetObject",
+              "Resource": "*"
+            }
+          ]
+        }
+      ]
+    },
+    "broker": {
+      "arn": "arn:aws:iam::111111111111:role/broker",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Resource": "arn:aws:iam::111111111111:role/admin"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "AWS": "arn:aws:iam::111111111111:role/ci"
+            }
+          }
+        ]
+      }
+    },
+    "admin": {
+      "arn": "arn:aws:iam::111111111111:role/admin",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "AWS": "arn:aws:iam::111111111111:role/broker"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "buckets": {},
+  "security_groups": {},
+  "collection_errors": []
+}

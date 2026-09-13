@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "hardened",
+  "account_id": "111111111111",
+  "source": "synthetic",
+  "regions": [
+    "us-east-1"
+  ],
+  "controls_complete": true,
+  "roles": {
+    "ci": {
+      "arn": "arn:aws:iam::111111111111:role/ci",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Resource": "arn:aws:iam::111111111111:role/broker"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Statement": []
+      }
+    },
+    "broker": {
+      "arn": "arn:aws:iam::111111111111:role/broker",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Resource": "arn:aws:iam::111111111111:role/admin"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "AWS": "arn:aws:iam::111111111111:role/ci"
+            }
+          }
+        ]
+      }
+    },
+    "admin": {
+      "arn": "arn:aws:iam::111111111111:role/admin",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "s3:GetObject",
+              "Resource": "arn:aws:s3:::approved/*"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "AWS": "arn:aws:iam::111111111111:role/broker"
+            }
+          }
+        ]
+      }
+    },
+    "public-role": {
+      "arn": "arn:aws:iam::111111111111:role/public-role",
+      "policies": [],
+      "trust": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "AWS": "arn:aws:iam::111111111111:role/ci"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "buckets": {
+    "research-data": {
+      "arn": "arn:aws:s3:::aegis-synthetic-research-data",
+      "public_policy": true,
+      "restrict_public_buckets": true
+    }
+  },
+  "security_groups": {
+    "admin-sg": {
+      "arn": "arn:aws:ec2:us-east-1:111111111111:security-group/sg-synthetic",
+      "ingress": [
+        {
+          "protocol": "tcp",
+          "from_port": 22,
+          "to_port": 22,
+          "cidrs": [
+            "10.0.0.0/24"
+          ]
+        }
+      ]
+    }
+  },
+  "collection_errors": []
+}

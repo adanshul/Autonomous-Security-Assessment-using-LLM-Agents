@@ -1,0 +1,36 @@
+[build-system]
+requires = ["hatchling>=1.25,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "aegis-cloud-assessment"
+version = "0.1.0"
+description = "Evidence-first research harness for agentic AWS security assessment"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = ["pydantic>=2.8,<3"]
+
+[project.optional-dependencies]
+aws = ["boto3>=1.35,<2"]
+dev = ["pytest>=8,<9", "pytest-cov>=5,<7", "ruff>=0.11,<1", "build>=1.2,<2"]
+
+[project.scripts]
+aegis = "aegis_cloud.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/aegis_cloud"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+# Embedded CSS/HTML is kept as a portable template rather than artificially wrapped Python strings.
+"src/aegis_cloud/reporting.py" = ["E501"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"

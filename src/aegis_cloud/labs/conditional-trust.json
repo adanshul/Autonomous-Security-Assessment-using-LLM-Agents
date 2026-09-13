@@ -1,0 +1,92 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "conditional-trust",
+  "account_id": "111111111111",
+  "source": "synthetic",
+  "regions": [
+    "us-east-1"
+  ],
+  "controls_complete": true,
+  "roles": {
+    "ci": {
+      "arn": "arn:aws:iam::111111111111:role/ci",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Resource": "arn:aws:iam::111111111111:role/broker"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Statement": []
+      }
+    },
+    "broker": {
+      "arn": "arn:aws:iam::111111111111:role/broker",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "sts:AssumeRole",
+              "Resource": "arn:aws:iam::111111111111:role/admin"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "AWS": "arn:aws:iam::111111111111:role/ci"
+            },
+            "Condition": {
+              "StringEquals": {
+                "sts:ExternalId": "synthetic-context-not-provided"
+              }
+            }
+          }
+        ]
+      }
+    },
+    "admin": {
+      "arn": "arn:aws:iam::111111111111:role/admin",
+      "policies": [
+        {
+          "Version": "2012-10-17",
+          "Statement": [
+            {
+              "Effect": "Allow",
+              "Action": "*",
+              "Resource": "*"
+            }
+          ]
+        }
+      ],
+      "trust": {
+        "Version": "2012-10-17",
+        "Statement": [
+          {
+            "Effect": "Allow",
+            "Action": "sts:AssumeRole",
+            "Principal": {
+              "AWS": "arn:aws:iam::111111111111:role/broker"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "buckets": {},
+  "security_groups": {},
+  "collection_errors": []
+}

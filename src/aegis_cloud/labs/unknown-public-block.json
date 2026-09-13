@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "snapshot_id": "unknown-public-block",
+  "account_id": "111111111111",
+  "source": "synthetic",
+  "regions": [
+    "us-east-1"
+  ],
+  "controls_complete": true,
+  "roles": {},
+  "buckets": {
+    "research-data": {
+      "arn": "arn:aws:s3:::aegis-synthetic-research-data",
+      "public_policy": true,
+      "restrict_public_buckets": null
+    }
+  },
+  "security_groups": {},
+  "collection_errors": []
+}
